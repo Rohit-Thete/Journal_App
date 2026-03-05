@@ -24,14 +24,14 @@ public class JournalEntryService {
         return journalEntryRepository.findAll();
     }
 
-    @Transactional
+
     public void saveEntry(JournalEntry journalEntry, String userName){
        try {
            User user = userService.findByUserName(userName);
            journalEntry.setDate(LocalDateTime.now());
            JournalEntry saved = journalEntryRepository.save(journalEntry);
            user.getJournalEntries().add(saved);
-           userService.saveEntry(user);
+           userService.saveNewUser(user);
        }
        catch (Exception e)
        {

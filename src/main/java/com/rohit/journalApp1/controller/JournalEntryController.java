@@ -2,6 +2,7 @@ package com.rohit.journalApp1.controller;
 
 
 import com.rohit.journalApp1.entity.JournalEntry;
+import org.bson.types.ObjectId;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -10,9 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/_journal")
+@RequestMapping("/journal")
 public class JournalEntryController {
-    private Map<Long, JournalEntry> journalEntries = new HashMap<>();
+    private Map<ObjectId, JournalEntry> journalEntries = new HashMap<>();
 
 @GetMapping
     public List<JournalEntry> getAll(){
@@ -21,7 +22,7 @@ public class JournalEntryController {
 
     @PostMapping
     public boolean createEntry(@RequestBody JournalEntry myEntry){
-      //  journalEntries.put(myEntry.getId(),myEntry);
+       journalEntries.put(myEntry.getId(),myEntry);
         return true;
 
     }

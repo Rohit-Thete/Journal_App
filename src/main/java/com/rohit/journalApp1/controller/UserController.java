@@ -18,7 +18,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    // private Map<Long, JournalEntry> journalEntries = new HashMap<>();
+
     @Autowired
     private UserService userService;
 
@@ -27,10 +27,15 @@ public class UserController {
         return userService.getAll();
     }
 
+    @PostMapping
+    public ResponseEntity<?> createUser(@RequestBody User user){
+        userService.saveEntry(user);
+        return new ResponseEntity<>(user,HttpStatus.CREATED);
+    }
 
     @PutMapping("/{userName}")
     public ResponseEntity<?> updateUser(@RequestBody User user,@PathVariable String userName){
-        User userInDb = userService.findByUserName(user.getUserName());
+        User userInDb = userService.findByUserName(userName);
         if(userInDb != null){
             userInDb.setUserName(user.getUserName());
             userInDb.setPassword(user.getPassword());
@@ -38,7 +43,6 @@ public class UserController {
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 }
 
 

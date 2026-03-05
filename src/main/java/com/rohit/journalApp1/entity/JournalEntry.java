@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 
 @Document(collation = "journal_entries")
 @Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class JournalEntry {
     private ObjectId id;

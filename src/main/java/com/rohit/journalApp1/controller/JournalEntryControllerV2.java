@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @RestController
-@RequestMapping("/journal")
+@RequestMapping("/_journal")
 public class JournalEntryControllerV2 {
    // private Map<Long, JournalEntry> journalEntries = new HashMap<>();
 
